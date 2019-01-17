@@ -86,8 +86,9 @@ class FreeMind(object):
                 continue
             is_testsuite = False
             has_steps = False
+            '''修正了只有红色旗标才能识别为目录的bug'''
             for item_icon in tds_item.findall('icon'):
-                if item_icon.attrib['BUILTIN'] == 'flag':
+                if 'flag' in item_icon.attrib['BUILTIN']:
                     ts_node_order += 1
                     child_ts_node = lxmlET.SubElement(ts_node, 'testsuite', {'name': tds_item.attrib['TEXT'].strip()})
                     self.logger.info(
